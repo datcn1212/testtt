@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes|Dancing+Script&display=swap" rel="stylesheet">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Magic Christmas - Final Clean</title>
@@ -268,11 +268,11 @@
 
         function createPhotos() {
             const geo = new THREE.PlaneGeometry(8, 8);
-            const borderGeo = new THREE.PlaneGeometry(9, 9); 
-            const borderMat = new THREE.MeshBasicMaterial({ color: 0xFFD700 }); 
+            const borderGeo = new THREE.PlaneGeometry(8.2, 8.2); 
+            const borderMat = new THREE.MeshBasicMaterial({ color: 0xFFB6C1 }); 
 
             for(let i=0; i<5; i++) {
-                const mat = new THREE.MeshBasicMaterial({ map: photoTextures[i], side: THREE.DoubleSide });
+                const mat = new THREE.MeshBasicMaterial({ map: photoTextures[i], side: THREE.DoubleSide, transparent: true, opacity: 0.9 });
                 const mesh = new THREE.Mesh(geo, mat);
                 const border = new THREE.Mesh(borderGeo, borderMat);
                 border.position.z = -0.1; 
@@ -288,10 +288,10 @@
             const canvas = document.createElement('canvas');
             canvas.width = 1024; canvas.height = 256;
             const ctx = canvas.getContext('2d');
-            ctx.font = 'bold italic 90px "Times New Roman"';
+            ctx.font = '80px "Dancing Script", cursive';
             ctx.fillStyle = '#FFD700'; ctx.textAlign = 'center';
             ctx.shadowColor = "#FF0000"; ctx.shadowBlur = 40; 
-            ctx.fillText("MERRY CHRISTMAS", 512, 130);
+            ctx.fillText("MERRY CHRISTMAS 2025", 512, 130);
             const tex = new THREE.CanvasTexture(canvas);
             const mat = new THREE.MeshBasicMaterial({ map: tex, transparent: true, blending: THREE.AdditiveBlending });
             titleMesh = new THREE.Mesh(new THREE.PlaneGeometry(60, 15), mat);
@@ -386,7 +386,7 @@
             lCtx.textBaseline = "middle";
 
             // ==== *** Changed only this line ***
-            lCtx.font = 'italic 120px "Great Vibes", cursive';
+            lCtx.font = 'bold 120px "Great Vibes", cursive';
 
             // ==== Main gradient fill ====
             const grad = lCtx.createLinearGradient(0, 0, 0, loveCanvas.height);
@@ -488,7 +488,7 @@
             } else {
                 // EXPLODE
                 group.scale.set(1,1,1);
-                group.rotation.y += (handRotY - group.rotation.y) * 0.1;
+                group.rotation.y += 0.005; // Auto roll with slow speed
 
                 // size, color
                 for(let i=0; i<count; i++) {
